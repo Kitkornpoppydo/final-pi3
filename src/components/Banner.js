@@ -17,6 +17,9 @@ const Banner = () => {
           <p className='text-2xl max-w-[480px] mb-8'>
              ถ้าต้องการแลกเปลี่ยนหรือขายหนังสือ พวกเรายินดีต้อนรับ
           </p>
+          <p className='text-2xl max-w-[480px] mb-8'>
+             ถ้าต้องการแลกเปลี่ยนหรือขายหนังสือ พวกเรายินดีต้อนรับ
+          </p>
         </div>
         {/* image */}
         <div className='hidden flex-1 lg:flex justify-end items-end'> 
