@@ -9,15 +9,25 @@ import Header from './components/Header';
 //import page
 import Home from './pages/Home';
 import PropertyDetails from './pages/PropertyDetails';
+import ShowProduct from './components/ShowProduct';
+
+
+
 
 const App = () => {
   return (
     <div className='max-w-[1440px] mx-auto bg-white'>
       <Header />
       <Routes>
-      <Route  path='/' element={<Home />} />
-      <Route  path='/property/:id' element={<PropertyDetails />} />
-    </Routes>
+        <Route>
+          <Route  path='/' element={<Home />} />
+          <Route  path='/property/:id' element={<PropertyDetails />} />
+          <Route path='/showproduct' element={<ShowProduct />} />
+        </Route>
+      </Routes>
+
+      
+      
     </div>
 
   );

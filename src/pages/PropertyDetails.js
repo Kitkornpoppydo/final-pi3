@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
+
+
 
 //import data
 import { utccData } from '../data';
 
 ////import use parma
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+
+
 
 
 const PropertyDetails = () => {
@@ -15,6 +19,13 @@ const PropertyDetails = () => {
     return house.id === parseInt(id);
   });
 
+  //input file form
+  const [file, setFile] = useState([]);
+  const inputFile = useRef(null);
+
+  const handleChange = (e) => {
+    setFile([...file, e.target.files[0]]);
+  };
 
   return (
     <section>
@@ -39,16 +50,21 @@ const PropertyDetails = () => {
           <form className='flex flex-col gap-y-4'>
             <input className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm' type='text' placeholder='ชื่อ-นามสกุล'/>
             <input className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm' type='text' placeholder='เบอร์โทร'/>
+            <input className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm' type='text' placeholder='โปรดระบุคณะ'/>
             <input className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm' type='text' placeholder='โปรดระบุชนิดที่ต้องการขาย'/>
-            <textarea className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm text-gray-400' placeholder='ราคา'></textarea>
+            <input className='bg-white-700 text-black px-4 py-3 rounded-lg transition'  type='file' onChange={handleChange} ref={inputFile} />
+            {file.map((x) => x.name).join}
+            <input className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm' type='number' placeholder='โปรดระบุราคา'/>
             <div>
-              <button className='bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-full transition'>ตกลง</button>
+            <button className='bg-green-700 text-white rounded p-4 text-sm w-full transition'>ตกลง</button>
             </div>
           </form>
         </div>
       </div>
     </div>
   </section>
+
+
   );
 };
 

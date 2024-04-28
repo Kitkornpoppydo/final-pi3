@@ -14,9 +14,9 @@ const Header = () => {
         <Link to = '/'>
           <img src ={Logo} alt='' width={140} />
         </Link>
-        { /* button */}
-        <div className='flex items-center'>
-          <Link className='bg-violet-700 hover:bg-violet-800 text-white px-4 py-3 rounded-lg transition' to = ''>scan line</Link>
+        <div className='flex justify-between items-center gap-8'>
+          <Link to = '/'><h2 className='text-2xl' >Home</h2></Link>
+          <Link to = "/showproduct"><h2 className='text-2xl'>Book</h2></Link>
         </div>
       </div>
     </header>
