@@ -6,26 +6,50 @@ import React, { useState, useRef } from 'react';
 import { utccData } from '../data';
 
 ////import use parma
-import { Link, useParams } from 'react-router-dom';
+import {  useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 
 
 
 const PropertyDetails = () => {
 // get the Utcc id
-  const {id} = useParams();
+const {id} = useParams();
 
-  const house = utccData.find((house) => {
-    return house.id === parseInt(id);
-  });
+const house = utccData.find((house) => {
+  return house.id === parseInt(id);
+});
 
-  //input file form
-  const [file, setFile] = useState([]);
-  const inputFile = useRef(null);
+//input file form
+const [file, setFile] = useState([]);
+const inputFile = useRef(null);
 
-  const handleChange = (e) => {
-    setFile([...file, e.target.files[0]]);
-  };
+
+
+let navigate=useNavigate()
+
+const [user,setUser]=useState({
+  name:"",
+  phone:"",
+  faculty:"",
+  type:"",
+  nameproduct:"",
+  price:"",
+});
+
+const{ name, phone, faculty, type, nameproduct, price } = user
+
+const onInputChange=(e)=>{
+
+  setUser({...user, [e.target.name]: e.target.value});
+};
+
+
+const onSubmit =async (e) => {
+  e.preventDefault();
+  await axios.post("http://localhost:8080/user",user)
+  navigate("/showproduct")
+};
 
   return (
     <section>
@@ -47,18 +71,24 @@ const PropertyDetails = () => {
             <div className='font-bold text-2xl'>{house.information}</div>
           </div>
           {/* from */}
-          <form className='flex flex-col gap-y-4'>
-            <input className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm' type='text' placeholder='ชื่อ-นามสกุล'/>
-            <input className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm' type='text' placeholder='เบอร์โทร'/>
-            <input className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm' type='text' placeholder='โปรดระบุคณะ'/>
-            <input className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm' type='text' placeholder='โปรดระบุชนิดที่ต้องการขาย'/>
-            <input className='bg-white-700 text-black px-4 py-3 rounded-lg transition'  type='file' onChange={handleChange} ref={inputFile} />
-            {file.map((x) => x.name).join}
-            <input className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm' type='number' placeholder='โปรดระบุราคา'/>
+          <form className='flex flex-col gap-y-4' onSubmit={(e)=> onSubmit(e)}>
+            <input className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm'  
+            type='text' placeholder='ชื่อ-นามสกุล' name='name' value={name} onChange={(e)=>onInputChange(e)}/>
+            <input className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm'  
+            type='text' placeholder='เบอร์โทร' name='phone' value={phone} onChange={(e)=>onInputChange(e)}/>
+            <input className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm'  
+            type='text' placeholder='โปรดระบุคณะ' name='faculty' value={faculty} onChange={(e)=>onInputChange(e)}/>
+            <input className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm'  
+            type='text' placeholder='โปรดระบุชนิดที่ต้องการขาย' name='type' value={type} onChange={(e)=>onInputChange(e)}/>
+            <input className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm'  
+            type='text' placeholder='ชือสินค้า' name='nameproduct' value={nameproduct} onChange={(e)=>onInputChange(e)}/>
+            <input className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm'  
+            type='number' placeholder='โปรดระบุราคา' name='price' value={price} onChange={(e)=>onInputChange(e)}/>
             <div>
             <button className='bg-green-700 text-white rounded p-4 text-sm w-full transition'>ตกลง</button>
             </div>
           </form>
+
         </div>
       </div>
     </div>

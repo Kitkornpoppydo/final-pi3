@@ -15,8 +15,11 @@ const Header = () => {
           <img src ={Logo} alt='' width={140} />
         </Link>
         <div className='flex justify-between items-center gap-8'>
-          <Link to = '/'><h2 className='text-2xl' >Home</h2></Link>
-          <Link to = "/showproduct"><h2 className='text-2xl'>Book</h2></Link>
+         <Link to = '/home'><h2 className='text-2xl' >หน้าแรก</h2></Link>
+          <Link to = 'showproduct'><h2 className='text-2xl'>หน้าหนังสือ</h2></Link>
+          <Link to = '/proflie'><h2 className='text-2xl'>โปรไฟล์</h2></Link>
+
+
         </div>
       </div>
     </header>

@@ -10,7 +10,9 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import PropertyDetails from './pages/PropertyDetails';
 import ShowProduct from './components/ShowProduct';
-
+import Sellproduct from './components/Sellproduct';
+import Login from './pages/Login';
+import Proflie from './pages/Proflie';
 
 
 
@@ -20,14 +22,16 @@ const App = () => {
       <Header />
       <Routes>
         <Route>
-          <Route  path='/' element={<Home />} />
+          <Route  path='/home' element={<Home />} />
           <Route  path='/property/:id' element={<PropertyDetails />} />
           <Route path='/showproduct' element={<ShowProduct />} />
+          <Route path='/sellproduct/:id' element={<Sellproduct />} />
+          <Route path='/proflie' element={<Proflie />} />
         </Route>
       </Routes>
-
-      
-      
+      <Routes>
+        <Route path='/' element={<Login />} />
+      </Routes>
     </div>
 
   );
